@@ -1,0 +1,52 @@
+pool:
+  vmImage: 'Ubuntu 16.04'
+
+variables:
+  buildConfiguration: 'Release'
+  version: '0.2.1'
+  repository: "wk-j/azure-release"
+
+steps:
+
+- script: dotnet tool install -g Cake.Tool
+  displayName: "Install cake"
+
+- task: CacheBeta@0
+  displayName: CacheBeta
+  inputs:
+    key: 'package-lock.json'
+    path: 'node_modules'
+    cacheHitVar: npmCache
+
+- script: |
+    npm install
+
+# - script: |
+#     dotnet test tests/MyWeb.Tests/MyWeb.Tests.csproj \
+#       --configuration Release  \
+#       --logger trx \
+#       /p:CollectCoverage=true \
+#       /p:CoverletOutputFormat=cobertura
+#   displayName: Run tests
+
+# - script: |
+#     dotnet tool install -g dotnet-reportgenerator-globaltool
+#     ~/.dotnet/tools/reportgenerator -reports:"./tests/**/coverage.cobertura.xml" \
+#       -targetdir:./.tests \
+#       -reporttypes:"HtmlInline_AzurePipelines;Cobertura"
+#   displayName: Create code coverage report
+
+# - task: PublishTestResults@2
+#   inputs:
+#     testRunner: VSTest
+#     testResultsFiles: '**/*.trx'
+
+# - task: PublishCodeCoverageResults@1
+#   displayName: 'Publish code coverage'
+#   inputs:
+#     codeCoverageTool: Cobertura
+#     summaryFileLocation: '$(Build.SourcesDirectory)/.tests/Cobertura.xml'
+#     reportDirectory: '$(Build.SourcesDirectory)/.tests'
+
+# - script: ~/.dotnet/tools/dotnet-cake -target=Pack
+#   displayName: 'Build with cake'
