@@ -26,8 +26,8 @@ steps:
 
 - script: |
     npm install
-    displayName: 'Npm install'
+  displayName: 'Npm install'
 
 - script: |
     dotnet test tests/MyWeb.Tests/MyWeb.Tests.csproj
-    displayName: '.NET tests'
+  displayName: '.NET tests'
