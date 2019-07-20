@@ -8,6 +8,10 @@ variables:
 
 steps:
 
+- script: |
+     dotnet nuget locals --list global-packages
+  displayName: 'Show global package path'
+
 - task: CacheBeta@0
   displayName: 'Cache package-lock.json'
   inputs:
