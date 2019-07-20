@@ -19,8 +19,8 @@ steps:
   displayName: 'CacheBeta (NuGet)'
   inputs:
     key: |
-      tests/MyWeb.Tests/MyWeb.Tests.csproj
-      src/MyWeb/MyWeb.csproj
+      $(Build.SourcesDirectory)/tests/MyWeb.Tests/MyWeb.Tests.csproj
+      $(Build.SourcesDirectory)/src/MyWeb/MyWeb.csproj
     path: '$(Pipeline.Workspace)/.nuget/packages'
     cacheHitVar: 'package_cache_hit'
 
