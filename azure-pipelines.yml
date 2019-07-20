@@ -6,6 +6,10 @@ variables:
 
 steps:
 
+- task: NuGetToolInstaller@0
+  inputs:
+    versionSpec: '4.3.0'
+
 - script: |
      dotnet nuget locals --list global-packages
      nuget config -set globalPackagesFolder=$(globalPackagesFolder) -configfile NuGet.Config
