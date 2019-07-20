@@ -2,15 +2,14 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 variables:
-  buildConfiguration: 'Release'
-  version: '0.2.1'
-  repository: "wk-j/azure-release"
+  globalPackagesFolder: './pacakge'
 
 steps:
 
 - script: |
      dotnet nuget locals --list global-packages
-  displayName: 'Show global package path'
+     nuget config -set globalPackagesFolder=$(globalPackagesFolder) -configfile NuGet.Config
+  displayName: 'Change global package path'
 
 - task: CacheBeta@0
   displayName: 'Cache package-lock.json'
@@ -23,7 +22,7 @@ steps:
   displayName: 'Cache nuget packages'
   inputs:
     key: MyWeb.Tests.csproj
-    path: '$(Build.SourcesDirectory)/.packages'
+    path: '$(Build.SourcesDirectory)/$(globalPackagesFolder)'
     cacheHitVar: nugetCache
 
 - script: |

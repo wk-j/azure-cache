@@ -6,5 +6,5 @@
 
 
 ```
-nuget config -set repositoryPath=./packages -configfile NuGet.Config
+nuget config -set globalPackagesFolder=./packages -configfile NuGet.Config
 ```
