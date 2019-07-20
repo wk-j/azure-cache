@@ -23,7 +23,7 @@ steps:
   displayName: 'Cache nuget packages'
   inputs:
     key: MyWeb.Tests.csproj
-    path: '~/.nuget/packages'
+    path: '$(Build.SourcesDirectory)/.packages'
     cacheHitVar: nugetCache
 
 - script: |

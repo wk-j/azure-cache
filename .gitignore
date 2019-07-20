@@ -10,6 +10,7 @@ packages
 tools
 publish
 
+.packages
 .paket
 .settings
 .classpath
