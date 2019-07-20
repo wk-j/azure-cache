@@ -9,18 +9,18 @@ variables:
 steps:
 
 - task: CacheBeta@0
-  displayName: CacheBeta
+  displayName: 'Cache package-lock.json'
   inputs:
     key: 'package-lock.json'
     path: '$(Build.SourcesDirectory)/node_modules'
     cacheHitVar: npmCache
 
 - task: CacheBeta@0
-  displayName: 'CacheBeta (NuGet)'
+  displayName: 'Cache nuget packages'
   inputs:
-    key: $(nuget.package_cache_key)
-    path: '$(Pipeline.Workspace)/.nuget/packages'
-    cacheHitVar: 'package_cache_hit'
+    key: MyWeb.Tests.csproj
+    path: '~/.nuget/packages'
+    cacheHitVar: nugetCache
 
 - script: |
     npm install
