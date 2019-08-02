@@ -2,13 +2,12 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 variables:
-  globalPackagesFolder: './pacakge'
+  globalPackagesFolder: '$(Build.SourcesDirectory)/packages'
 
 steps:
 
 - script: |
      dotnet nuget locals --list global-packages
-    #  nuget config -set globalPackagesFolder=$(globalPackagesFolder) -configfile NuGet.Config
   displayName: 'Change global package path'
 
 - task: CacheBeta@0
@@ -22,7 +21,7 @@ steps:
   displayName: 'Cache nuget packages'
   inputs:
     key: MyWeb.Tests.csproj
-    path: '$(Build.SourcesDirectory)/$(globalPackagesFolder)'
+    path: '$(globalPackagesFolder)'
     cacheHitVar: nugetCache
 
 - script: |
